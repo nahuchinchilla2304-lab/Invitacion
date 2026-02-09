@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>San Valentín 💘</title>
+
+<style>
+:root{
+  --accent:#ff2d6f;
+  --accent2:#b3003c;
+  --txt:#3a0b18;
+}
+
+*{ box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
+
+body{
+  margin:0;
+  min-height:100vh;
+  font-family: ui-serif, "Times New Roman", Georgia, serif;
+  background: radial-gradient(circle at top, #ffd6e6, #fff7fb);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:
+    calc(16px + env(safe-area-inset-top))
+    calc(16px + env(safe-area-inset-right))
+    calc(16px + env(safe-area-inset-bottom))
+    calc(16px + env(safe-area-inset-left));
+  overflow:hidden;
+}
+
+.float-hearts{
+  position:fixed; inset:0; pointer-events:none; z-index:0;
+}
+.heart{
+  position:absolute;
+  animation: floatUp linear infinite;
+  opacity:.25;
+}
+@keyframes floatUp{
+  from{ transform:translateY(110vh) rotate(0deg); }
+  to{ transform:translateY(-20vh) rotate(360deg); }
+}
+
+.card{
+  position:relative;
+  z-index:1;
+  width:min(820px,95vw);
+  background:#ffffffdd;
+  border-radius:30px;
+  padding:30px 24px;
+  text-align:center;
+  box-shadow:0 20px 50px rgba(0,0,0,.15);
+  backdrop-filter: blur(10px);
+}
+
+h1{
+  margin:0 0 14px;
+  font-style:italic;
+  color:var(--accent2);
+  font-size:clamp(26px,5vw,38px);
+}
+
+.question{
+  font-style:italic;
+  font-size:clamp(18px,4.5vw,22px);
+  line-height:1.5;
+  white-space:pre-line;
+  margin: 0 auto 18px;
+  max-width: 620px;
+}
+
+.tenorBox{
+  width:min(420px,92%);
+  margin:16px auto;
+  border-radius:22px;
+  overflow:hidden;
+  border:1px solid #ffd0df;
+  box-shadow:0 12px 30px rgba(0,0,0,.1);
+  background:#fff;
+}
+
+.buttons{
+  position:relative;
+  margin-top:18px;
+  min-height:70px;
+}
+
+button{
+  border:0;
+  border-radius:999px;
+  padding:16px 26px;
+  font-size:17px;
+  font-weight:800;
+  cursor:pointer;
+  transition:.15s;
+}
+
+#yes{
+  background:linear-gradient(180deg,#ff6a9c,var(--accent));
+  color:white;
+  box-shadow:0 14px 28px rgba(255,45,111,.3);
+}
+#yes:active{ transform:scale(.97); }
+
+#no{
+  position:absolute;
+  background:#fff;
+  border:1px solid #ffc0d3;
+  color:#8a1a3e;
+  box-shadow:0 10px 22px rgba(0,0,0,.08);
+  left: 0;
+  top: 0;
+}
+
+.hint{
+  margin-top:12px;
+  font-style:italic;
+  font-size:13px;
+  opacity:.7;
+}
+
+.msg{
+  display:none;
+  margin-top:20px;
+  font-style:italic;
+}
+
+.msg p{
+  font-size:clamp(22px,5vw,28px);
+  margin:10px 0;
+  line-height: 1.25;
+}
+
+.fadeOut{
+  animation: fade .25s forwards;
+}
+@keyframes fade{
+  to{ opacity:0; height:0; margin:0; padding:0; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="float-hearts" id="floatHearts"></div>
+
+<div class="card">
+  <h1>💘 San Valentín 💘</h1>
+
+  <p class="question" id="question">Hola Bren, te tengo una pregunta…
+¿Quieres ser mi San Valentín?</p>
+
+  <!-- GIF INICIAL (Zootopia) -->
+  <div class="tenorBox" id="introGif">
+    <div class="tenor-gif-embed"
+      data-postid="9567664"
+      data-share-method="host"
+      data-aspect-ratio="1"
+      data-width="100%">
+    </div>
+  </div>
+
+  <div class="buttons" id="buttons">
+    <button id="yes" type="button">Sí</button>
+    <button id="no" type="button">No</button>
+  </div>
+
+  <div class="hint" id="hint">Uy, como que el "No" está nervioso</div>
+
+  <!-- MENSAJE FINAL -->
+  <div class="msg" id="msg">
+    <p><strong>Lo sabía… 😌💘 ¡estás súper obsesionada!</strong></p>
+    <p>¡Gracias Bren, te quiero mucho! 🥰💖✨</p>
+
+    <!-- GIF FINAL (Bumblebee) -->
+    <div class="tenorBox">
+      <div class="tenor-gif-embed"
+        data-postid="2576367639442595030"
+        data-share-method="host"
+        data-aspect-ratio="1"
+        data-width="100%">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ✅ IMPORTANTE: cargar Tenor SIEMPRE para que el gif inicial se renderice -->
+<script async src="https://tenor.com/embed.js"></script>
+
+<script>
+// corazones fondo
+const floatHearts = document.getElementById("floatHearts");
+for(let i=0;i<24;i++){
+  const h=document.createElement("div");
+  h.className="heart";
+  h.textContent=["💗","💖","💕","💘"][Math.floor(Math.random()*4)];
+  h.style.left=Math.random()*100+"vw";
+  h.style.fontSize=(14+Math.random()*20)+"px";
+  h.style.animationDuration=(8+Math.random()*10)+"s";
+  h.style.animationDelay=(-Math.random()*10)+"s";
+  floatHearts.appendChild(h);
+}
+
+// botón NO nervioso
+const noBtn=document.getElementById("no");
+const buttons=document.getElementById("buttons");
+const yesBtn=document.getElementById("yes");
+const question=document.getElementById("question");
+const hint=document.getElementById("hint");
+const msg=document.getElementById("msg");
+const introGif=document.getElementById("introGif");
+
+function moveNo(){
+  const r=buttons.getBoundingClientRect();
+  const maxX = Math.max(0, r.width - noBtn.offsetWidth - 6);
+  const maxY = Math.max(0, r.height - noBtn.offsetHeight - 6);
+  noBtn.style.left = (Math.random()*maxX) + "px";
+  noBtn.style.top  = (Math.random()*maxY) + "px";
+}
+noBtn.addEventListener("mouseenter", moveNo);
+noBtn.addEventListener("touchstart", (e)=>{ moveNo(); e.preventDefault(); }, {passive:false});
+
+// botón SÍ
+yesBtn.addEventListener("click", ()=>{
+  if(navigator.vibrate) navigator.vibrate([20,30,20]);
+
+  question.classList.add("fadeOut");
+  hint.classList.add("fadeOut");
+  introGif.classList.add("fadeOut");
+
+  buttons.style.display="none";
+  msg.style.display="block";
+
+  // explosión corazones
+  for(let i=0;i<30;i++){
+    const e=document.createElement("div");
+    e.textContent=["💖","💗","💕","💘"][Math.floor(Math.random()*4)];
+    e.style.position="fixed";
+    e.style.left=Math.random()*100+"vw";
+    e.style.top=(70+Math.random()*25)+"vh";
+    e.style.fontSize=(20+Math.random()*20)+"px";
+    e.style.pointerEvents="none";
+    e.style.zIndex="9999";
+    document.body.appendChild(e);
+    setTimeout(()=>e.remove(),1200);
+  }
+});
+</script>
+
+</body>
+</html>
+
+
